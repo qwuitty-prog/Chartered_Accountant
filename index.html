@@ -1,1 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProFinancials | Chartered Accountant Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #1a4b8c;
+            --primary-dark: #0d2b5c;
+            --primary-light: #2a6bc5;
+            --secondary: #f8b739;
+            --accent: #2ecc71;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Strap Styles */
+        .contact-strap {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.9rem;
+            overflow: hidden;
+            white-space: nowrap;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1002;
+            height: 32px;
+        }
+
+        .contact-strap-content {
+            display: inline-flex;
+            align-items: center;
+            animation: moveStrap 40s linear infinite;
+        }
+
+        .contact-strap-item {
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            white-space: nowrap;
+        }
+
+        .contact-strap-item i {
+            margin-right: 8px;
+            color: var(--secondary);
+        }
+
+        @keyframes moveStrap {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 32px; /* Height of contact strap */
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            height: 80px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section - FIXED: Now starts below navigation with proper spacing */
+        .hero {
+            position: relative;
+            height: 600px;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 112px; /* This is the key fix: contact-strap (32px) + header (80px) */
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 4rem 0;
+            background-color: var(--light-bg);
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .welcome-section h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-section p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(26, 75, 140, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 0;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo span {
+            color: var(--secondary);
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .welcome-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-strap-content {
+                animation: moveStrap 30s linear infinite;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 112px; /* Contact strap + header height */
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .nav-links li {
+                margin: 0 0 1.5rem 0;
+            }
+
+            .hero {
+                height: 500px;
+                margin-top: 112px; /* Keep the same margin-top for mobile */
+            }
+            
+            .contact-strap-content {
+                animation: moveStrap 25s linear infinite;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 400px;
+                margin-top: 112px; /* Keep the same margin-top for small mobile */
+            }
+
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .contact-strap-item {
+                margin-right: 25px;
+                font-size: 0.8rem;
+            }
+            
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contact Strap -->
+    <div class="contact-strap">
+        <div class="contact-strap-content">
+            <div class="contact-strap-item">
+                <i class="fas fa-phone"></i>
+                <span>+91 9004329806</span>
+            </div>
+            <div class="contact-strap-item">
+                <i class="fas fa-envelope"></i>
+                <span>hello@codersverse.in</span>
+            </div>
+            <div class="contact-strap-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Mumbai, India</span>
+            </div>
+            <div class="contact-strap-item">
+                <i class="fas fa-clock"></i>
+                <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+            </div>
+            <div class="contact-strap-item">
+                <i class="fas fa-phone"></i>
+                <span>+91 9004329806</span>
+            </div>
+            <div class="contact-strap-item">
+                <i class="fas fa-envelope"></i>
+                <span>hello@codersverse.in</span>
+            </div>
+            <div class="contact-strap-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Mumbai, India</span>
+            </div>
+            <div class="contact-strap-item">
+                <i class="fas fa-clock"></i>
+                <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-text">Pro<span>Financials</span></div>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section - Now fully visible from the top -->
+    <section class="hero">
+        <img src="https://github.com/qwuitty-prog/Chartered_Accountant/blob/main/assets/images/Blue%20Modern%20Accounting%20Business%20Card.png?raw=true" 
+             alt="Professional Chartered Accountant Services" 
+             class="hero-image">
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <div class="welcome-section">
+                <h1>Welcome to ProFinancials</h1>
+                <p>Your trusted partner for professional chartered accountant services. We provide comprehensive financial solutions, tax planning, audit services, and business consultancy to help your business grow while ensuring full compliance with all regulatory requirements.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Expert Tax Planning</h3>
+                        <p>Strategic tax solutions to minimize liabilities and maximize savings with full compliance.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h3>Audit & Assurance</h3>
+                        <p>Comprehensive audit services for financial statements and internal control systems.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Business Advisory</h3>
+                        <p>Expert guidance on business strategy, financial planning, and growth opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">Pro<span>Financials</span></div>
+                <p>Providing expert chartered accountant services with integrity, professionalism, and a commitment to client success.</p>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+                <p><i class="fas fa-phone"></i> +91 9004329806</p>
+                <p><i class="fas fa-envelope"></i> hello@codersverse.in</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 ProFinancials Chartered Accountant Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/919004320906?text=Hi%20there,%20I'm%20interested%20in%20your%20chartered%20accountant%20services" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Prevent text wrapping in contact strap
+        const contactStrapItems = document.querySelectorAll('.contact-strap-item');
+        contactStrapItems.forEach(item => {
+            item.style.whiteSpace = 'nowrap';
+        });
+        
+        // JavaScript fix to ensure hero image is perfectly positioned
+        document.addEventListener('DOMContentLoaded', function() {
+            function fixHeroPosition() {
+                const contactStrap = document.querySelector('.contact-strap');
+                const header = document.querySelector('header');
+                const hero = document.querySelector('.hero');
+                
+                if (contactStrap && header && hero) {
+                    const contactStrapHeight = contactStrap.offsetHeight;
+                    const headerHeight = header.offsetHeight;
+                    const totalHeight = contactStrapHeight + headerHeight;
+                    
+                    // Set hero margin-top to the exact combined height
+                    hero.style.marginTop = totalHeight + 'px';
+                    
+                    // Also ensure body doesn't have padding-top
+                    document.body.style.paddingTop = '0';
+                }
+            }
+            
+            // Fix on load
+            fixHeroPosition();
+            
+            // Fix on resize
+            window.addEventListener('resize', fixHeroPosition);
+            
+            // Fix after a short delay to ensure all elements are loaded
+            setTimeout(fixHeroPosition, 100);
+        });
+    </script>
+</body>
+</html>
