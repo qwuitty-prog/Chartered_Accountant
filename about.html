@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>ProFinancials | Chartered Accountant Services</title>
+    <title>About Us | ProFinancials</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap">
     <style>
@@ -51,7 +51,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Contact Strap Styles - Fixed for Mobile */
+        /* Contact Strap Styles */
         .contact-strap {
             background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
             color: var(--white);
@@ -97,7 +97,7 @@
             }
         }
 
-        /* Header & Navigation - Fixed for Mobile */
+        /* Header & Navigation */
         header {
             background-color: var(--white);
             box-shadow: var(--shadow);
@@ -185,9 +185,8 @@
             width: 100%;
         }
 
-        /* Mobile Menu Button - FIXED */
+        /* Mobile Menu Button - FIXED: REMOVED display: none */
         .mobile-menu-btn {
-            display: none;
             background: none;
             border: none;
             font-size: 1.8rem;
@@ -203,29 +202,15 @@
             align-items: center;
             justify-content: center;
             padding: 0;
-        }
-
-        /* Hero Section - Fixed for Mobile */
-        .hero {
-            position: relative;
-            height: 600px;
-            width: 100%;
-            overflow: hidden;
-            margin-top: 112px;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            display: none; /* Will be shown on mobile via media query */
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            padding: 4rem 0;
+            padding: 5rem 0;
             background-color: var(--light-bg);
+            margin-top: 112px; /* contact-strap (32px) + header (80px) */
         }
 
         .content-container {
@@ -234,45 +219,139 @@
             padding: 0 20px;
         }
 
-        .welcome-section {
+        /* About Hero */
+        .about-hero {
             text-align: center;
             margin-bottom: 4rem;
+            padding: 3rem 0;
         }
 
-        .welcome-section h1 {
-            font-size: 2.8rem;
+        .about-hero h1 {
+            font-size: 3rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
         }
 
-        .welcome-section p {
-            font-size: 1.2rem;
+        .about-hero p {
+            font-size: 1.3rem;
             color: var(--text-light);
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .features-grid {
+        /* About Sections */
+        .about-section {
+            margin-bottom: 4rem;
+        }
+
+        .about-section h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mission & Vision */
+        .mission-vision-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .feature-card {
+        .mission-card, .vision-card {
             background-color: var(--white);
             border-radius: 8px;
             padding: 2.5rem;
             box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .mission-card h3, .vision-card h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .mission-card i, .vision-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
-        .feature-card:hover {
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .member-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .member-info .position {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .feature-icon {
+        .value-icon {
             width: 70px;
             height: 70px;
             background-color: rgba(26, 75, 140, 0.1);
@@ -285,15 +364,9 @@
             font-size: 1.8rem;
         }
 
-        .feature-card h3 {
-            text-align: center;
+        .value-card h3 {
             color: var(--primary);
             margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            text-align: center;
-            color: var(--text-light);
         }
 
         /* Footer */
@@ -368,7 +441,7 @@
             font-size: 0.9rem;
         }
 
-        /* WhatsApp Float - Fixed for Mobile */
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -406,7 +479,7 @@
             }
         }
 
-        /* ========== RESPONSIVE STYLES - FIXED ========== */
+        /* ========== RESPONSIVE STYLES ========== */
         /* Desktop */
         @media (min-width: 1025px) {
             .mobile-menu-btn {
@@ -424,19 +497,19 @@
                 font-size: 1rem;
             }
             
-            .hero {
-                height: 500px;
+            .about-hero h1 {
+                font-size: 2.5rem;
             }
             
-            .welcome-section h1 {
-                font-size: 2.5rem;
+            .main-content {
+                margin-top: 112px;
             }
         }
 
-        /* Mobile (max-width: 768px) - FIXED */
+        /* Mobile (max-width: 768px) */
         @media (max-width: 768px) {
             .mobile-menu-btn {
-                display: flex;
+                display: flex !important; /* Force show on mobile */
             }
 
             .nav-links {
@@ -483,12 +556,12 @@
                 border-bottom: none;
             }
 
-            .welcome-section h1 {
+            .about-hero h1 {
                 font-size: 2.3rem;
             }
             
-            .hero {
-                height: 450px;
+            .about-hero p {
+                font-size: 1.1rem;
             }
             
             .contact-strap-item {
@@ -499,6 +572,11 @@
                 animation-duration: 30s;
             }
             
+            .main-content {
+                margin-top: 112px;
+                padding: 3rem 0;
+            }
+            
             body.menu-open {
                 overflow: hidden;
             }
@@ -506,26 +584,29 @@
 
         /* Small Mobile (max-width: 576px) */
         @media (max-width: 576px) {
-            .hero {
-                height: 400px;
-                margin-top: 112px;
+            .main-content {
+                margin-top: 100px;
+                padding: 2rem 0;
             }
 
-            .welcome-section h1 {
+            .about-hero h1 {
                 font-size: 2rem;
             }
             
-            .welcome-section p {
-                font-size: 1.1rem;
+            .about-hero p {
+                font-size: 1rem;
             }
 
-            .features-grid {
+            .mission-vision-grid,
+            .team-grid,
+            .values-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
 
-            .feature-card {
-                padding: 2rem 1.5rem;
+            .mission-card, .vision-card,
+            .value-card, .team-member {
+                padding: 1.5rem;
             }
             
             .contact-strap {
@@ -537,10 +618,6 @@
             header {
                 height: 70px;
                 top: 30px;
-            }
-            
-            .hero {
-                margin-top: 100px;
             }
             
             .nav-links {
@@ -585,10 +662,6 @@
 
         /* Extra Small Mobile (max-width: 400px) */
         @media (max-width: 400px) {
-            .hero {
-                height: 350px;
-            }
-            
             .contact-strap-item {
                 margin-right: 20px;
                 font-size: 0.75rem;
@@ -603,22 +676,21 @@
                 font-size: 1.5rem;
             }
             
-            .welcome-section h1 {
+            .about-hero h1 {
                 font-size: 1.8rem;
             }
             
-            .welcome-section p {
-                font-size: 1rem;
+            .about-hero p {
+                font-size: 0.95rem;
             }
             
-            .feature-card {
-                padding: 1.5rem 1rem;
+            .mission-card, .vision-card,
+            .value-card, .team-member {
+                padding: 1rem;
             }
             
-            .feature-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
+            .member-img {
+                height: 200px;
             }
             
             .whatsapp-float {
@@ -640,25 +712,15 @@
 
         /* Fix for very tall screens */
         @media (min-height: 800px) and (max-width: 768px) {
-            .hero {
-                height: 50vh;
-                min-height: 400px;
-                max-height: 500px;
-            }
-        }
-
-        /* Prevent zoom on input focus for iOS */
-        @media screen and (max-width: 768px) {
-            input, select, textarea {
-                font-size: 16px !important;
+            .main-content {
+                padding: 4rem 0;
             }
         }
 
         /* Fix for iOS Safari 100vh issue */
         @supports (-webkit-touch-callout: none) {
-            .hero {
-                height: -webkit-fill-available;
-                min-height: 400px;
+            .main-content {
+                min-height: -webkit-fill-available;
             }
         }
     </style>
@@ -715,55 +777,114 @@
             </button>
             
             <ul class="nav-links" id="main-navigation" role="navigation" aria-label="Main navigation">
-                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="about.html">About Us</a></li>
+                <li><a href="about.html" class="active" aria-current="page">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" aria-label="Hero banner">
-        <img src="https://github.com/qwuitty-prog/Chartered_Accountant/blob/main/assets/images/Card.png?raw=true" 
-             alt="Professional Chartered Accountant Services" 
-             class="hero-image"
-             onerror="this.src='https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'; this.onerror=null;">
-    </section>
-
     <!-- Main Content -->
     <main class="main-content">
         <div class="content-container">
-            <div class="welcome-section">
-                <h1>Welcome to ProFinancials</h1>
-                <p>Your trusted partner for professional chartered accountant services. We provide comprehensive financial solutions, tax planning, audit services, and business consultancy to help your business grow while ensuring full compliance with all regulatory requirements.</p>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Expert Tax Planning</h3>
-                        <p>Strategic tax solutions to minimize liabilities and maximize savings with full compliance.</p>
+            <!-- About Hero -->
+            <section class="about-hero">
+                <h1>About ProFinancials</h1>
+                <p>With over 15 years of experience in chartered accountancy, we are committed to providing exceptional financial services and building lasting relationships with our clients.</p>
+            </section>
+
+            <!-- Our Story -->
+            <section class="about-section">
+                <h2>Our Story</h2>
+                <p>Founded in 2008, ProFinancials began as a small practice with a big vision: to provide comprehensive, reliable, and innovative financial solutions to businesses and individuals. What started as a one-person operation has grown into a trusted firm serving clients across multiple industries.</p>
+                <p>Our journey has been marked by continuous learning, adaptation to changing financial landscapes, and an unwavering commitment to ethical practices. We believe that every client's financial success contributes to the broader economic growth of our community.</p>
+            </section>
+
+            <!-- Mission & Vision -->
+            <section class="about-section">
+                <h2>Mission & Vision</h2>
+                <div class="mission-vision-grid">
+                    <div class="mission-card">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Our Mission</h3>
+                        <p>To deliver exceptional accounting, auditing, and financial advisory services that empower our clients to make informed decisions, achieve financial stability, and realize their business goals through personalized, ethical, and innovative solutions.</p>
                     </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                        </div>
-                        <h3>Audit & Assurance</h3>
-                        <p>Comprehensive audit services for financial statements and internal control systems.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h3>Business Advisory</h3>
-                        <p>Expert guidance on business strategy, financial planning, and growth opportunities.</p>
+                    <div class="vision-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>Our Vision</h3>
+                        <p>To be recognized as the most trusted and progressive chartered accountancy firm, setting industry standards for excellence, integrity, and client-centric service while contributing to the financial literacy and economic development of our community.</p>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Our Values -->
+            <section class="about-section">
+                <h2>Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>We maintain the highest ethical standards in all our dealings, ensuring transparency and honesty in every aspect of our work.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Professionalism</h3>
+                        <p>Our team of qualified professionals delivers expert services with dedication, accuracy, and attention to detail.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Client Focus</h3>
+                        <p>We prioritize our clients' needs, building long-term relationships based on trust, understanding, and exceptional service.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Team -->
+            <section class="about-section">
+                <h2>Meet Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="Rahul Sharma - Senior Partner" 
+                             class="member-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
+                        <div class="member-info">
+                            <h3>Rahul Sharma</h3>
+                            <p class="position">Senior Partner & Founder</p>
+                            <p>CA with 18+ years of experience in corporate finance and taxation.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="Priya Patel - Audit Director" 
+                             class="member-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
+                        <div class="member-info">
+                            <h3>Priya Patel</h3>
+                            <p class="position">Audit & Assurance Director</p>
+                            <p>CA specializing in statutory audits and internal controls with 12 years of expertise.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             alt="Amit Kumar - Tax Consultant" 
+                             class="member-img"
+                             onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
+                        <div class="member-info">
+                            <h3>Amit Kumar</h3>
+                            <p class="position">Tax & Advisory Consultant</p>
+                            <p>Expert in tax planning and compliance with 10+ years of experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -790,7 +911,7 @@
     </footer>
 
     <!-- WhatsApp Float -->
-    <a href="https://wa.me/919004329806?text=Hi%20there,%20I'm%20interested%20in%20your%20chartered%20accountant%20services" 
+    <a href="https://wa.me/919004329806?text=Hi%20there,%20I'm%20interested%20in%20learning%20more%20about%20ProFinancials" 
        target="_blank" 
        class="whatsapp-float" 
        aria-label="Contact us on WhatsApp">
@@ -818,10 +939,12 @@
                     icon.classList.remove('fa-bars');
                     icon.classList.add('fa-times');
                     body.classList.add('menu-open');
+                    document.body.style.overflow = 'hidden';
                 } else {
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
                     body.classList.remove('menu-open');
+                    document.body.style.overflow = '';
                 }
             });
         }
@@ -836,6 +959,7 @@
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
                     body.classList.remove('menu-open');
+                    document.body.style.overflow = '';
                 }
             });
         });
@@ -851,6 +975,7 @@
                         icon.classList.remove('fa-times');
                         icon.classList.add('fa-bars');
                         body.classList.remove('menu-open');
+                        document.body.style.overflow = '';
                     }
                 }
             }
@@ -866,30 +991,31 @@
                     icon.classList.remove('fa-times');
                     icon.classList.add('fa-bars');
                     body.classList.remove('menu-open');
+                    document.body.style.overflow = '';
                 }
             }
         });
 
-        // Fix hero positioning on load and resize
-        function fixHeroPosition() {
+        // Fix positioning on load and resize
+        function fixPagePosition() {
             const contactStrap = document.querySelector('.contact-strap');
             const header = document.querySelector('header');
-            const hero = document.querySelector('.hero');
+            const mainContent = document.querySelector('.main-content');
             
-            if (contactStrap && header && hero) {
+            if (contactStrap && header && mainContent) {
                 const contactStrapHeight = contactStrap.offsetHeight;
                 const headerHeight = header.offsetHeight;
                 const totalHeight = contactStrapHeight + headerHeight;
                 
-                hero.style.marginTop = totalHeight + 'px';
+                mainContent.style.marginTop = totalHeight + 'px';
             }
         }
 
-        // Initialize on DOM ready
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            fixHeroPosition();
+            fixPagePosition();
             
-            // Fix for iOS Safari 100vh issue
+            // Set vh unit for iOS
             function setVhUnit() {
                 let vh = window.innerHeight * 0.01;
                 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -897,29 +1023,23 @@
             
             setVhUnit();
             window.addEventListener('resize', setVhUnit);
-            window.addEventListener('resize', fixHeroPosition);
+            window.addEventListener('resize', fixPagePosition);
             
             // Prevent horizontal scrolling
             document.body.style.overflowX = 'hidden';
             
-            // Fix contact strap animation on mobile
+            // Adjust contact strap animation for mobile
             if (window.innerWidth <= 768) {
                 const strapContent = document.querySelector('.contact-strap-content');
                 if (strapContent) {
-                    // Reduce animation speed on mobile
                     strapContent.style.animationDuration = '30s';
                 }
             }
         });
 
-        // Optimize animation for performance
+        // Optimize performance
         window.addEventListener('load', function() {
-            const strapItems = document.querySelectorAll('.contact-strap-item');
-            strapItems.forEach(item => {
-                item.style.willChange = 'transform';
-            });
-            
-            // Reduce animation when page is not visible
+            // Pause animation when page is not visible
             document.addEventListener('visibilitychange', function() {
                 const strapContent = document.querySelector('.contact-strap-content');
                 if (strapContent) {
