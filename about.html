@@ -709,7 +709,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Footer */
+        /* Footer - EXACT FROM REFERENCE */
         footer {
             background-color: var(--primary-dark);
             color: var(--white);
@@ -1061,7 +1061,7 @@
                     <p>Our team combines deep technical expertise with practical business acumen, ensuring that our advice is not only technically sound but also commercially viable. We serve as more than just accountants – we become strategic partners in your business journey.</p>
                 </div>
                 <div class="about-intro-image">
-                    <img src="https://images.unsplash.com/photo-1565689221354-d87f85d4aee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Indian Financial Professionals Meeting">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Indian Financial Professionals Working">
                 </div>
             </section>
 
@@ -1138,7 +1138,7 @@
                     <div class="team-grid">
                         <div class="team-member">
                             <div class="team-member-img">
-                                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Rahul Sharma - Indian CA Professional">
+                                <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Rahul Sharma - Indian CA Professional">
                             </div>
                             <div class="team-member-info">
                                 <h4>Rahul Sharma</h4>
@@ -1168,7 +1168,7 @@
                         
                         <div class="team-member">
                             <div class="team-member-img">
-                                <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Arjun Mehta - Indian CA Professional">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Arjun Mehta - Indian CA Professional">
                             </div>
                             <div class="team-member-info">
                                 <h4>Arjun Mehta</h4>
@@ -1205,7 +1205,7 @@
                         </div>
                         <div class="stat-item">
                             <div class="stat-number" data-count="98">0</div>
-                            <div class="stat-label">Client Retention</div>
+                            <div class="stat-label">Client Retention %</div>
                         </div>
                     </div>
                 </div>
@@ -1378,6 +1378,17 @@
         const contactStrapItems = document.querySelectorAll('.contact-strap-item');
         contactStrapItems.forEach(item => {
             item.style.whiteSpace = 'nowrap';
+        });
+
+        // Initialize counters when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if stats section is already in view
+            const statsSection = document.querySelector('.stats-section');
+            const sectionPosition = statsSection.getBoundingClientRect();
+            
+            if (sectionPosition.top < window.innerHeight - 100) {
+                animateCounter();
+            }
         });
     </script>
 </body>
