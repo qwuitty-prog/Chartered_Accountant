@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>ProFinancials | Chartered Accountant Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap">
@@ -27,6 +27,12 @@
             --transition: all 0.3s ease;
         }
 
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
@@ -35,6 +41,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            padding-top: 0 !important;
         }
 
         h1, h2, h3, h4, h5 {
@@ -44,7 +51,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Contact Strap Styles */
+        /* Contact Strap Styles - Fixed for Mobile */
         .contact-strap {
             background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
             color: var(--white);
@@ -58,12 +65,14 @@
             right: 0;
             z-index: 1002;
             height: 32px;
+            width: 100vw;
         }
 
         .contact-strap-content {
             display: inline-flex;
             align-items: center;
             animation: moveStrap 40s linear infinite;
+            white-space: nowrap;
         }
 
         .contact-strap-item {
@@ -71,6 +80,7 @@
             align-items: center;
             margin-right: 40px;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .contact-strap-item i {
@@ -87,16 +97,17 @@
             }
         }
 
-        /* Header & Navigation */
+        /* Header & Navigation - Fixed for Mobile */
         header {
             background-color: var(--white);
             box-shadow: var(--shadow);
             position: fixed;
-            top: 32px; /* Height of contact strap */
+            top: 32px;
             left: 0;
             right: 0;
             z-index: 1001;
             height: 80px;
+            width: 100%;
         }
 
         .nav-container {
@@ -113,6 +124,7 @@
         .logo {
             display: flex;
             align-items: center;
+            z-index: 1003;
         }
 
         .logo-text {
@@ -173,7 +185,7 @@
             width: 100%;
         }
 
-        /* Mobile Menu Button - FIXED POSITION */
+        /* Mobile Menu Button - FIXED */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -188,18 +200,18 @@
             z-index: 1003;
             width: 40px;
             height: 40px;
-            display: flex;
             align-items: center;
             justify-content: center;
+            padding: 0;
         }
 
-        /* Hero Section */
+        /* Hero Section - Fixed for Mobile */
         .hero {
             position: relative;
             height: 600px;
             width: 100%;
             overflow: hidden;
-            margin-top: 112px; /* contact-strap (32px) + header (80px) */
+            margin-top: 112px;
         }
 
         .hero-image {
@@ -356,7 +368,7 @@
             font-size: 0.9rem;
         }
 
-        /* WhatsApp Float */
+        /* WhatsApp Float - Fixed for Mobile */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -371,9 +383,10 @@
             justify-content: center;
             font-size: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            z-index: 999;
             transition: var(--transition);
             animation: pulse 2s infinite;
+            text-decoration: none;
         }
 
         .whatsapp-float:hover {
@@ -393,18 +406,34 @@
             }
         }
 
-        /* ========== RESPONSIVE STYLES ========== */
-        /* Desktop - Nothing changed */
-        @media (min-width: 769px) {
+        /* ========== RESPONSIVE STYLES - FIXED ========== */
+        /* Desktop */
+        @media (min-width: 1025px) {
             .mobile-menu-btn {
                 display: none !important;
             }
-            .nav-links {
-                display: flex !important;
+        }
+
+        /* Tablet (768px - 1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .nav-links li {
+                margin-left: 1.5rem;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+            }
+            
+            .hero {
+                height: 500px;
+            }
+            
+            .welcome-section h1 {
+                font-size: 2.5rem;
             }
         }
 
-        /* Tablet (768px) */
+        /* Mobile (max-width: 768px) - FIXED */
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: flex;
@@ -412,70 +441,129 @@
 
             .nav-links {
                 position: fixed;
-                top: 112px; /* Contact strap + header height */
+                top: 112px;
                 left: 0;
                 width: 100%;
                 background-color: var(--white);
                 flex-direction: column;
                 align-items: center;
                 padding: 2rem 0;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-                transform: translateY(-100%);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                transform: translateX(100%);
                 opacity: 0;
-                transition: var(--transition);
-                z-index: 999;
-                display: none;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                max-height: calc(100vh - 112px);
+                overflow-y: auto;
+                visibility: hidden;
             }
 
             .nav-links.active {
-                transform: translateY(0);
+                transform: translateX(0);
                 opacity: 1;
-                display: flex;
+                visibility: visible;
             }
 
             .nav-links li {
-                margin: 0 0 1.5rem 0;
+                margin: 0;
                 width: 100%;
                 text-align: center;
             }
 
             .nav-links a {
                 display: block;
-                padding: 1rem 2rem;
+                padding: 1.2rem 2rem;
                 font-size: 1.1rem;
                 width: 100%;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-links li:last-child a {
+                border-bottom: none;
             }
 
             .welcome-section h1 {
-                font-size: 2.5rem;
+                font-size: 2.3rem;
             }
             
             .hero {
-                height: 500px;
+                height: 450px;
+            }
+            
+            .contact-strap-item {
+                margin-right: 30px;
+            }
+            
+            .contact-strap-content {
+                animation-duration: 30s;
+            }
+            
+            body.menu-open {
+                overflow: hidden;
             }
         }
 
-        /* Mobile (576px) */
+        /* Small Mobile (max-width: 576px) */
         @media (max-width: 576px) {
             .hero {
                 height: 400px;
+                margin-top: 112px;
             }
 
             .welcome-section h1 {
                 font-size: 2rem;
             }
+            
+            .welcome-section p {
+                font-size: 1.1rem;
+            }
 
             .features-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .feature-card {
-                padding: 2rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            .contact-strap {
+                font-size: 0.8rem;
+                height: 30px;
+                padding: 6px 0;
+            }
+            
+            header {
+                height: 70px;
+                top: 30px;
+            }
+            
+            .hero {
+                margin-top: 100px;
+            }
+            
+            .nav-links {
+                top: 100px;
             }
             
             .contact-strap-item {
                 margin-right: 25px;
-                font-size: 0.8rem;
+            }
+            
+            .contact-strap-content {
+                animation-duration: 25s;
+            }
+            
+            .logo-text {
+                font-size: 1.6rem;
+            }
+            
+            .mobile-menu-btn {
+                right: 15px;
+                font-size: 1.6rem;
+                width: 36px;
+                height: 36px;
             }
             
             .whatsapp-float {
@@ -483,11 +571,19 @@
                 height: 55px;
                 bottom: 20px;
                 right: 20px;
-                font-size: 1.7rem;
+                font-size: 1.8rem;
+            }
+            
+            .footer-container {
+                gap: 2rem;
+            }
+            
+            .footer-logo {
+                font-size: 1.6rem;
             }
         }
 
-        /* Small Mobile (400px) */
+        /* Extra Small Mobile (max-width: 400px) */
         @media (max-width: 400px) {
             .hero {
                 height: 350px;
@@ -498,6 +594,11 @@
                 font-size: 0.75rem;
             }
             
+            .contact-strap-item i {
+                margin-right: 5px;
+                font-size: 0.8rem;
+            }
+            
             .logo-text {
                 font-size: 1.5rem;
             }
@@ -506,47 +607,96 @@
                 font-size: 1.8rem;
             }
             
-            .mobile-menu-btn {
+            .welcome-section p {
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
                 font-size: 1.5rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+                bottom: 15px;
                 right: 15px;
+            }
+            
+            .contact-strap-content {
+                animation-duration: 20s;
+            }
+            
+            .nav-container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Fix for very tall screens */
+        @media (min-height: 800px) and (max-width: 768px) {
+            .hero {
+                height: 50vh;
+                min-height: 400px;
+                max-height: 500px;
+            }
+        }
+
+        /* Prevent zoom on input focus for iOS */
+        @media screen and (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+        }
+
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                height: -webkit-fill-available;
+                min-height: 400px;
             }
         }
     </style>
 </head>
 <body>
     <!-- Contact Strap -->
-    <div class="contact-strap">
+    <div class="contact-strap" aria-label="Contact information">
         <div class="contact-strap-content">
             <div class="contact-strap-item">
-                <i class="fas fa-phone"></i>
+                <i class="fas fa-phone" aria-hidden="true"></i>
                 <span>+91 9004329806</span>
             </div>
             <div class="contact-strap-item">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-envelope" aria-hidden="true"></i>
                 <span>hello@codersverse.in</span>
             </div>
             <div class="contact-strap-item">
-                <i class="fas fa-map-marker-alt"></i>
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                 <span>Mumbai, India</span>
             </div>
             <div class="contact-strap-item">
-                <i class="fas fa-clock"></i>
+                <i class="fas fa-clock" aria-hidden="true"></i>
                 <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
             </div>
             <div class="contact-strap-item">
-                <i class="fas fa-phone"></i>
+                <i class="fas fa-phone" aria-hidden="true"></i>
                 <span>+91 9004329806</span>
             </div>
             <div class="contact-strap-item">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-envelope" aria-hidden="true"></i>
                 <span>hello@codersverse.in</span>
             </div>
             <div class="contact-strap-item">
-                <i class="fas fa-map-marker-alt"></i>
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                 <span>Mumbai, India</span>
             </div>
             <div class="contact-strap-item">
-                <i class="fas fa-clock"></i>
+                <i class="fas fa-clock" aria-hidden="true"></i>
                 <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
             </div>
         </div>
@@ -559,13 +709,13 @@
                 <div class="logo-text">Pro<span>Financials</span></div>
             </div>
             
-            <!-- 3-Line Hamburger Menu Button -->
-            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="main-navigation">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+            <ul class="nav-links" id="main-navigation" role="navigation" aria-label="Main navigation">
+                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -574,10 +724,11 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" aria-label="Hero banner">
         <img src="https://github.com/qwuitty-prog/Chartered_Accountant/blob/main/assets/images/Card.png?raw=true" 
              alt="Professional Chartered Accountant Services" 
-             class="hero-image">
+             class="hero-image"
+             onerror="this.src='https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'; this.onerror=null;">
     </section>
 
     <!-- Main Content -->
@@ -589,7 +740,7 @@
                 
                 <div class="features-grid">
                     <div class="feature-card">
-                        <div class="feature-icon">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <h3>Expert Tax Planning</h3>
@@ -597,7 +748,7 @@
                     </div>
                     
                     <div class="feature-card">
-                        <div class="feature-icon">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-file-invoice-dollar"></i>
                         </div>
                         <h3>Audit & Assurance</h3>
@@ -605,7 +756,7 @@
                     </div>
                     
                     <div class="feature-card">
-                        <div class="feature-icon">
+                        <div class="feature-icon" aria-hidden="true">
                             <i class="fas fa-handshake"></i>
                         </div>
                         <h3>Business Advisory</h3>
@@ -626,10 +777,10 @@
             
             <div class="footer-contact">
                 <h3>Contact Info</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
-                <p><i class="fas fa-phone"></i> +91 9004329806</p>
-                <p><i class="fas fa-envelope"></i> hello@codersverse.in</p>
-                <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+                <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Mumbai, India</p>
+                <p><i class="fas fa-phone" aria-hidden="true"></i> +91 9004329806</p>
+                <p><i class="fas fa-envelope" aria-hidden="true"></i> hello@codersverse.in</p>
+                <p><i class="fas fa-clock" aria-hidden="true"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
             </div>
         </div>
         
@@ -639,73 +790,146 @@
     </footer>
 
     <!-- WhatsApp Float -->
-    <a href="https://wa.me/919004329806?text=Hi%20there,%20I'm%20interested%20in%20your%20chartered%20accountant%20services" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
+    <a href="https://wa.me/919004329806?text=Hi%20there,%20I'm%20interested%20in%20your%20chartered%20accountant%20services" 
+       target="_blank" 
+       class="whatsapp-float" 
+       aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 
     <script>
-        // Mobile Menu Toggle - WORKING 3-LINE HAMBURGER
+        // Mobile Menu Toggle - Fixed Version
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
-        
-        // Toggle menu when hamburger is clicked
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            
-            // Change icon from bars to X and back
-            if (navLinks.classList.contains('active')) {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
-            } else {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                document.body.style.overflow = ''; // Restore scrolling
-            }
-        });
-        
+        const body = document.body;
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
+                
+                // Change icon
+                const icon = mobileMenuBtn.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    body.classList.add('menu-open');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    body.classList.remove('menu-open');
+                }
+            });
+        }
+
         // Close menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                document.body.style.overflow = ''; // Restore scrolling
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    body.classList.remove('menu-open');
+                }
             });
         });
-        
+
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                document.body.style.overflow = ''; // Restore scrolling
-            }
-        });
-        
-        // Prevent text wrapping in contact strap
-        const contactStrapItems = document.querySelectorAll('.contact-strap-item');
-        contactStrapItems.forEach(item => {
-            item.style.whiteSpace = 'nowrap';
-        });
-        
-        // Fix hero positioning
-        document.addEventListener('DOMContentLoaded', function() {
-            function fixHeroPosition() {
-                const contactStrap = document.querySelector('.contact-strap');
-                const header = document.querySelector('header');
-                const hero = document.querySelector('.hero');
-                
-                if (contactStrap && header && hero) {
-                    const contactStrapHeight = contactStrap.offsetHeight;
-                    const headerHeight = header.offsetHeight;
-                    const totalHeight = contactStrapHeight + headerHeight;
-                    
-                    hero.style.marginTop = totalHeight + 'px';
-                    document.body.style.paddingTop = '0';
+            if (navLinks && navLinks.classList.contains('active')) {
+                if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        body.classList.remove('menu-open');
+                    }
                 }
             }
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    body.classList.remove('menu-open');
+                }
+            }
+        });
+
+        // Fix hero positioning on load and resize
+        function fixHeroPosition() {
+            const contactStrap = document.querySelector('.contact-strap');
+            const header = document.querySelector('header');
+            const hero = document.querySelector('.hero');
             
+            if (contactStrap && header && hero) {
+                const contactStrapHeight = contactStrap.offsetHeight;
+                const headerHeight = header.offsetHeight;
+                const totalHeight = contactStrapHeight + headerHeight;
+                
+                hero.style.marginTop = totalHeight + 'px';
+            }
+        }
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
             fixHeroPosition();
+            
+            // Fix for iOS Safari 100vh issue
+            function setVhUnit() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            setVhUnit();
+            window.addEventListener('resize', setVhUnit);
             window.addEventListener('resize', fixHeroPosition);
-            setTimeout(fixHeroPosition, 100);
+            
+            // Prevent horizontal scrolling
+            document.body.style.overflowX = 'hidden';
+            
+            // Fix contact strap animation on mobile
+            if (window.innerWidth <= 768) {
+                const strapContent = document.querySelector('.contact-strap-content');
+                if (strapContent) {
+                    // Reduce animation speed on mobile
+                    strapContent.style.animationDuration = '30s';
+                }
+            }
+        });
+
+        // Optimize animation for performance
+        window.addEventListener('load', function() {
+            const strapItems = document.querySelectorAll('.contact-strap-item');
+            strapItems.forEach(item => {
+                item.style.willChange = 'transform';
+            });
+            
+            // Reduce animation when page is not visible
+            document.addEventListener('visibilitychange', function() {
+                const strapContent = document.querySelector('.contact-strap-content');
+                if (strapContent) {
+                    if (document.hidden) {
+                        strapContent.style.animationPlayState = 'paused';
+                    } else {
+                        strapContent.style.animationPlayState = 'running';
+                    }
+                }
+            });
         });
     </script>
 </body>
