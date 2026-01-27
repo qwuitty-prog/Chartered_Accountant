@@ -173,11 +173,12 @@
             width: 100%;
         }
 
+        /* Mobile Menu Button - FIXED POSITION */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary);
             cursor: pointer;
             position: absolute;
@@ -185,15 +186,20 @@
             top: 50%;
             transform: translateY(-50%);
             z-index: 1003;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Hero Section - FIXED: Now starts below navigation with proper spacing */
+        /* Hero Section */
         .hero {
             position: relative;
             height: 600px;
             width: 100%;
             overflow: hidden;
-            margin-top: 112px; /* This is the key fix: contact-strap (32px) + header (80px) */
+            margin-top: 112px; /* contact-strap (32px) + header (80px) */
         }
 
         .hero-image {
@@ -387,20 +393,21 @@
             }
         }
 
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .welcome-section h1 {
-                font-size: 2.5rem;
+        /* ========== RESPONSIVE STYLES ========== */
+        /* Desktop - Nothing changed */
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none !important;
             }
-            
-            .contact-strap-content {
-                animation: moveStrap 30s linear infinite;
+            .nav-links {
+                display: flex !important;
             }
         }
 
+        /* Tablet (768px) */
         @media (max-width: 768px) {
             .mobile-menu-btn {
-                display: block;
+                display: flex;
             }
 
             .nav-links {
@@ -417,36 +424,41 @@
                 opacity: 0;
                 transition: var(--transition);
                 z-index: 999;
+                display: none;
             }
 
             .nav-links.active {
                 transform: translateY(0);
                 opacity: 1;
+                display: flex;
             }
 
             .nav-links li {
                 margin: 0 0 1.5rem 0;
+                width: 100%;
+                text-align: center;
             }
 
             .nav-links a {
+                display: block;
+                padding: 1rem 2rem;
                 font-size: 1.1rem;
-                padding: 10px 20px;
+                width: 100%;
             }
 
-            .hero {
-                height: 500px;
-                margin-top: 112px; /* Keep the same margin-top for mobile */
+            .welcome-section h1 {
+                font-size: 2.5rem;
             }
             
-            .contact-strap-content {
-                animation: moveStrap 25s linear infinite;
+            .hero {
+                height: 500px;
             }
         }
 
+        /* Mobile (576px) */
         @media (max-width: 576px) {
             .hero {
                 height: 400px;
-                margin-top: 112px; /* Keep the same margin-top for small mobile */
             }
 
             .welcome-section h1 {
@@ -472,6 +484,31 @@
                 bottom: 20px;
                 right: 20px;
                 font-size: 1.7rem;
+            }
+        }
+
+        /* Small Mobile (400px) */
+        @media (max-width: 400px) {
+            .hero {
+                height: 350px;
+            }
+            
+            .contact-strap-item {
+                margin-right: 20px;
+                font-size: 0.75rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .welcome-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .mobile-menu-btn {
+                font-size: 1.5rem;
+                right: 15px;
             }
         }
     </style>
@@ -522,6 +559,7 @@
                 <div class="logo-text">Pro<span>Financials</span></div>
             </div>
             
+            <!-- 3-Line Hamburger Menu Button -->
             <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
                 <i class="fas fa-bars"></i>
             </button>
@@ -535,7 +573,7 @@
         </div>
     </header>
 
-    <!-- Hero Section - Now fully visible from the top -->
+    <!-- Hero Section -->
     <section class="hero">
         <img src="https://github.com/qwuitty-prog/Chartered_Accountant/blob/main/assets/images/Card.png?raw=true" 
              alt="Professional Chartered Accountant Services" 
@@ -606,22 +644,30 @@
     </a>
 
     <script>
-        // Mobile Menu Toggle - FIXED
+        // Mobile Menu Toggle - WORKING 3-LINE HAMBURGER
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
         
+        // Toggle menu when hamburger is clicked
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+            
+            // Change icon from bars to X and back
+            if (navLinks.classList.contains('active')) {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = ''; // Restore scrolling
+            }
         });
         
-        // Close mobile menu when clicking on a link
+        // Close menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = ''; // Restore scrolling
             });
         });
         
@@ -630,6 +676,7 @@
             if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target) && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
                 mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = ''; // Restore scrolling
             }
         });
         
@@ -639,7 +686,7 @@
             item.style.whiteSpace = 'nowrap';
         });
         
-        // JavaScript fix to ensure hero image is perfectly positioned
+        // Fix hero positioning
         document.addEventListener('DOMContentLoaded', function() {
             function fixHeroPosition() {
                 const contactStrap = document.querySelector('.contact-strap');
@@ -651,21 +698,13 @@
                     const headerHeight = header.offsetHeight;
                     const totalHeight = contactStrapHeight + headerHeight;
                     
-                    // Set hero margin-top to the exact combined height
                     hero.style.marginTop = totalHeight + 'px';
-                    
-                    // Also ensure body doesn't have padding-top
                     document.body.style.paddingTop = '0';
                 }
             }
             
-            // Fix on load
             fixHeroPosition();
-            
-            // Fix on resize
             window.addEventListener('resize', fixHeroPosition);
-            
-            // Fix after a short delay to ensure all elements are loaded
             setTimeout(fixHeroPosition, 100);
         });
     </script>
