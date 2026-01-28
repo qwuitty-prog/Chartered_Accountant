@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | ProFinancials Chartered Accountant Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Contact Us | ProFinancials | Chartered Accountant Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap">
     <style>
@@ -27,6 +27,12 @@
             --transition: all 0.3s ease;
         }
 
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
@@ -35,6 +41,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            padding-top: 0 !important;
         }
 
         h1, h2, h3, h4, h5 {
@@ -44,59 +51,75 @@
             margin-bottom: 1rem;
         }
 
-        /* Contact Strap Styles */
+        /* Contact Strap - EXACTLY LIKE services.html */
         .contact-strap {
             background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
             color: var(--white);
             padding: 8px 0;
             font-size: 0.9rem;
             overflow: hidden;
-            white-space: nowrap;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1002;
             height: 32px;
+            width: 100vw;
+            will-change: transform;
+        }
+
+        .contact-strap-container {
+            display: inline-flex;
+            min-width: 200%;
+            animation: slideStrap 40s linear infinite;
         }
 
         .contact-strap-content {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            animation: moveStrap 40s linear infinite;
+            flex: 1;
+            white-space: nowrap;
         }
 
         .contact-strap-item {
             display: flex;
             align-items: center;
-            margin-right: 40px;
+            margin: 0 25px;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .contact-strap-item i {
             margin-right: 8px;
             color: var(--secondary);
+            font-size: 0.9rem;
         }
 
-        @keyframes moveStrap {
+        @keyframes slideStrap {
             0% {
-                transform: translateX(100%);
+                transform: translateX(0);
             }
             100% {
-                transform: translateX(-100%);
+                transform: translateX(-50%);
             }
         }
 
-        /* Header & Navigation */
+        /* Pause animation on hover */
+        .contact-strap:hover .contact-strap-container {
+            animation-play-state: paused;
+        }
+
+        /* Header & Navigation - FIXED for Mobile */
         header {
             background-color: var(--white);
             box-shadow: var(--shadow);
             position: fixed;
-            top: 32px; /* Height of contact strap */
+            top: 32px;
             left: 0;
             right: 0;
             z-index: 1001;
             height: 80px;
+            width: 100%;
         }
 
         .nav-container {
@@ -107,11 +130,13 @@
             justify-content: space-between;
             align-items: center;
             height: 100%;
+            position: relative;
         }
 
         .logo {
             display: flex;
             align-items: center;
+            z-index: 1003;
         }
 
         .logo-text {
@@ -172,24 +197,37 @@
             width: 100%;
         }
 
+        /* Mobile Menu Button - FIXED */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary);
             cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1003;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
         }
 
-        /* Page Header - Hero Section */
+        /* Page Header */
         .page-header {
             background: linear-gradient(rgba(26, 75, 140, 0.85), rgba(13, 43, 92, 0.9)), url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: var(--white);
             text-align: center;
-            padding: 120px 20px 80px;
+            padding: 100px 20px 80px;
             margin-top: 112px;
+            width: 100%;
         }
 
         .page-header h1 {
@@ -242,6 +280,7 @@
 
         .info-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
         .info-card-header {
@@ -529,9 +568,10 @@
             justify-content: center;
             font-size: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            z-index: 999;
             transition: var(--transition);
             animation: pulse 2s infinite;
+            text-decoration: none;
         }
 
         .whatsapp-float:hover {
@@ -565,62 +605,130 @@
             display: block;
         }
 
-        /* Responsive Styles */
-        @media (max-width: 992px) {
+        /* ========== RESPONSIVE STYLES ========== */
+        /* Desktop */
+        @media (min-width: 1025px) {
+            .mobile-menu-btn {
+                display: none !important;
+            }
+        }
+
+        /* Tablet (768px - 1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .nav-links li {
+                margin-left: 1.5rem;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+            }
+            
             .page-header h1 {
                 font-size: 2.8rem;
             }
             
-            .contact-strap-content {
-                animation: moveStrap 30s linear infinite;
+            .contact-strap-container {
+                animation-duration: 30s;
             }
         }
 
+        /* Mobile (max-width: 768px) */
         @media (max-width: 768px) {
             .mobile-menu-btn {
-                display: block;
+                display: flex;
             }
 
             .nav-links {
                 position: fixed;
-                top: 112px; /* Contact strap + header height */
+                top: 112px;
                 left: 0;
                 width: 100%;
                 background-color: var(--white);
                 flex-direction: column;
                 align-items: center;
                 padding: 2rem 0;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-                transform: translateY(-100%);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                transform: translateX(100%);
                 opacity: 0;
-                transition: var(--transition);
-                z-index: 999;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                max-height: calc(100vh - 112px);
+                overflow-y: auto;
+                visibility: hidden;
             }
 
             .nav-links.active {
-                transform: translateY(0);
+                transform: translateX(0);
                 opacity: 1;
+                visibility: visible;
             }
 
             .nav-links li {
-                margin: 0 0 1.5rem 0;
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+                width: 100%;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-links li:last-child a {
+                border-bottom: none;
             }
 
             .page-header {
                 margin-top: 112px;
-                padding: 100px 20px 60px;
+                padding: 80px 20px 60px;
             }
             
-            .contact-strap-content {
-                animation: moveStrap 25s linear infinite;
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .contact-strap-container {
+                animation-duration: 25s;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+            
+            body.menu-open {
+                overflow: hidden;
             }
         }
 
+        /* Small Mobile (max-width: 576px) */
         @media (max-width: 576px) {
+            .page-header {
+                margin-top: 100px;
+                padding: 70px 20px 40px;
+            }
+
             .page-header h1 {
                 font-size: 2.2rem;
             }
-
+            
             .page-header p {
                 font-size: 1.1rem;
             }
@@ -633,9 +741,38 @@
                 padding: 1.5rem;
             }
             
-            .contact-strap-item {
-                margin-right: 25px;
+            .contact-strap {
                 font-size: 0.8rem;
+                height: 30px;
+                padding: 6px 0;
+            }
+            
+            header {
+                height: 70px;
+                top: 30px;
+            }
+            
+            .nav-links {
+                top: 100px;
+            }
+            
+            .contact-strap-item {
+                margin: 0 20px;
+            }
+            
+            .contact-strap-container {
+                animation-duration: 20s;
+            }
+            
+            .logo-text {
+                font-size: 1.6rem;
+            }
+            
+            .mobile-menu-btn {
+                right: 15px;
+                font-size: 1.6rem;
+                width: 36px;
+                height: 36px;
             }
             
             .whatsapp-float {
@@ -643,55 +780,141 @@
                 height: 55px;
                 bottom: 20px;
                 right: 20px;
-                font-size: 1.7rem;
+                font-size: 1.8rem;
             }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
+            
+            .footer-container {
+                gap: 2rem;
             }
+            
+            .footer-logo {
+                font-size: 1.6rem;
+            }
+            
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+        }
 
-            .map-container {
-                height: 350px;
+        /* Extra Small Mobile (max-width: 400px) */
+        @media (max-width: 400px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-strap-item {
+                margin: 0 15px;
+                font-size: 0.75rem;
+            }
+            
+            .contact-strap-item i {
+                margin-right: 5px;
+                font-size: 0.8rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+            
+            .info-card {
+                padding: 1.25rem;
+            }
+            
+            .info-card-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+                margin-right: 0.75rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .contact-strap-container {
+                animation-duration: 18s;
+            }
+            
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .faq-question {
+                padding: 1.25rem;
+            }
+            
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+        }
+
+        /* Fix for very tall screens */
+        @media (min-height: 800px) and (max-width: 768px) {
+            .page-header {
+                min-height: 40vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+
+        /* Prevent zoom on input focus for iOS */
+        @media screen and (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Contact Strap -->
-    <div class="contact-strap">
-        <div class="contact-strap-content">
-            <div class="contact-strap-item">
-                <i class="fas fa-phone"></i>
-                <span>+91 9004329806</span>
+    <!-- Contact Strap - EXACTLY LIKE services.html -->
+    <div class="contact-strap" aria-label="Contact information">
+        <div class="contact-strap-container">
+            <!-- First set -->
+            <div class="contact-strap-content">
+                <div class="contact-strap-item">
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                    <span>+91 9004329806</span>
+                </div>
+                <div class="contact-strap-item">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <span>hello@codersverse.in</span>
+                </div>
+                <div class="contact-strap-item">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span>Mumbai, India</span>
+                </div>
+                <div class="contact-strap-item">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+                </div>
             </div>
-            <div class="contact-strap-item">
-                <i class="fas fa-envelope"></i>
-                <span>hello@codersverse.in</span>
-            </div>
-            <div class="contact-strap-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Mumbai, India</span>
-            </div>
-            <div class="contact-strap-item">
-                <i class="fas fa-clock"></i>
-                <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
-            </div>
-            <div class="contact-strap-item">
-                <i class="fas fa-phone"></i>
-                <span>+91 9004329806</span>
-            </div>
-            <div class="contact-strap-item">
-                <i class="fas fa-envelope"></i>
-                <span>hello@codersverse.in</span>
-            </div>
-            <div class="contact-strap-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Mumbai, India</span>
-            </div>
-            <div class="contact-strap-item">
-                <i class="fas fa-clock"></i>
-                <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+            <!-- Duplicate set for seamless animation -->
+            <div class="contact-strap-content">
+                <div class="contact-strap-item">
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                    <span>+91 9004329806</span>
+                </div>
+                <div class="contact-strap-item">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <span>hello@codersverse.in</span>
+                </div>
+                <div class="contact-strap-item">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span>Mumbai, India</span>
+                </div>
+                <div class="contact-strap-item">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span>Mon-Fri: 9:00 AM - 6:00 PM</span>
+                </div>
             </div>
         </div>
     </div>
@@ -703,21 +926,22 @@
                 <div class="logo-text">Pro<span>Financials</span></div>
             </div>
             
-            <button class="mobile-menu-btn">
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="main-navigation">
                 <i class="fas fa-bars"></i>
             </button>
             
-            <ul class="nav-links">
+            <ul class="nav-links" id="main-navigation" role="navigation" aria-label="Main navigation">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="about.html">About Us</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
             </ul>
         </div>
     </header>
 
     <!-- Page Header -->
-    <section class="page-header">
+    <section class="page-header" aria-label="Contact page header">
         <h1>Get In Touch With Us</h1>
         <p>Reach out to our expert chartered accountants for personalized financial solutions and business advice.</p>
     </section>
@@ -773,7 +997,7 @@
                 <div class="contact-form-container">
                     <h2>Send Us a Message</h2>
                     <div class="success-message" id="successMessage">
-                        Thank you for your message! We will get back to you within 24 hours.
+                        <i class="fas fa-check-circle"></i> Thank you for your message! We will get back to you within 24 hours.
                     </div>
                     <form id="contactForm">
                         <div class="form-row">
@@ -889,7 +1113,8 @@
                         style="border:0;" 
                         allowfullscreen="" 
                         loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Our Location in Mumbai">
                     </iframe>
                 </div>
             </div>
@@ -906,10 +1131,10 @@
             
             <div class="footer-contact">
                 <h3>Contact Info</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
-                <p><i class="fas fa-phone"></i> +91 9004329806</p>
-                <p><i class="fas fa-envelope"></i> hello@codersverse.in</p>
-                <p><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
+                <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Mumbai, India</p>
+                <p><i class="fas fa-phone" aria-hidden="true"></i> +91 9004329806</p>
+                <p><i class="fas fa-envelope" aria-hidden="true"></i> hello@codersverse.in</p>
+                <p><i class="fas fa-clock" aria-hidden="true"></i> Mon-Fri: 9:00 AM - 6:00 PM</p>
             </div>
         </div>
         
@@ -919,30 +1144,86 @@
     </footer>
 
     <!-- WhatsApp Float -->
-    <a href="https://wa.me/919004329806?text=Hi%20there,%20I'm%20interested%20in%20your%20chartered%20accountant%20services" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
+    <a href="https://wa.me/919004329806?text=Hi%20there,%20I'm%20interested%20in%20your%20chartered%20accountant%20services" 
+       target="_blank" 
+       class="whatsapp-float" 
+       aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
     </a>
 
     <script>
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle - FIXED
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Close mobile menu when clicking on a link
+        const body = document.body;
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
+                
+                // Change icon
+                const icon = mobileMenuBtn.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                    body.classList.add('menu-open');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    body.classList.remove('menu-open');
+                }
+            });
+        }
+
+        // Close menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    body.classList.remove('menu-open');
+                }
             });
         });
-        
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (navLinks && navLinks.classList.contains('active')) {
+                if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                        body.classList.remove('menu-open');
+                    }
+                }
+            }
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    body.classList.remove('menu-open');
+                }
+            }
+        });
+
         // FAQ Accordion
         const faqQuestions = document.querySelectorAll('.faq-question');
         faqQuestions.forEach(question => {
@@ -979,8 +1260,7 @@
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // In a real application, you would send the form data to a server
-            // For this demo, we'll just show a success message
+            // Show success message
             successMessage.classList.add('active');
             
             // Reset form after 5 seconds
@@ -989,35 +1269,67 @@
                 successMessage.classList.remove('active');
             }, 5000);
         });
-        
-        // JavaScript fix to ensure page header is perfectly positioned
-        document.addEventListener('DOMContentLoaded', function() {
-            function fixPageHeaderPosition() {
-                const contactStrap = document.querySelector('.contact-strap');
-                const header = document.querySelector('header');
-                const pageHeader = document.querySelector('.page-header');
+
+        // Fix page header positioning
+        function fixPageHeaderPosition() {
+            const contactStrap = document.querySelector('.contact-strap');
+            const header = document.querySelector('header');
+            const pageHeader = document.querySelector('.page-header');
+            
+            if (contactStrap && header && pageHeader) {
+                const contactStrapHeight = contactStrap.offsetHeight;
+                const headerHeight = header.offsetHeight;
+                const totalHeight = contactStrapHeight + headerHeight;
                 
-                if (contactStrap && header && pageHeader) {
-                    const contactStrapHeight = contactStrap.offsetHeight;
-                    const headerHeight = header.offsetHeight;
-                    const totalHeight = contactStrapHeight + headerHeight;
-                    
-                    // Set page header margin-top to the exact combined height
-                    pageHeader.style.marginTop = totalHeight + 'px';
-                    
-                    // Also ensure body doesn't have padding-top
-                    document.body.style.paddingTop = '0';
+                pageHeader.style.marginTop = totalHeight + 'px';
+            }
+        }
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', function() {
+            fixPageHeaderPosition();
+            
+            // Adjust animation speed based on screen width (EXACTLY like services.html)
+            const strapContainer = document.querySelector('.contact-strap-container');
+            if (strapContainer) {
+                if (window.innerWidth <= 768) {
+                    strapContainer.style.animationDuration = '30s';
+                }
+                if (window.innerWidth <= 576) {
+                    strapContainer.style.animationDuration = '25s';
+                }
+                if (window.innerWidth <= 400) {
+                    strapContainer.style.animationDuration = '20s';
                 }
             }
             
-            // Fix on load
-            fixPageHeaderPosition();
+            // Fix for iOS Safari 100vh issue
+            function setVhUnit() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
             
-            // Fix on resize
+            setVhUnit();
+            window.addEventListener('resize', setVhUnit);
             window.addEventListener('resize', fixPageHeaderPosition);
             
-            // Fix after a short delay to ensure all elements are loaded
-            setTimeout(fixPageHeaderPosition, 100);
+            // Prevent horizontal scrolling
+            document.body.style.overflowX = 'hidden';
+        });
+
+        // Optimize animation for performance
+        window.addEventListener('load', function() {
+            // Reduce animation when page is not visible
+            document.addEventListener('visibilitychange', function() {
+                const strapContainer = document.querySelector('.contact-strap-container');
+                if (strapContainer) {
+                    if (document.hidden) {
+                        strapContainer.style.animationPlayState = 'paused';
+                    } else {
+                        strapContainer.style.animationPlayState = 'running';
+                    }
+                }
+            });
         });
     </script>
 </body>
