@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+index after mobile optimization changes below <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -205,7 +205,7 @@
             padding: 0;
         }
 
-        /* Hero Section - Fixed for Mobile */
+        /* Hero Section - OPTIMIZED FOR MOBILE */
         .hero {
             position: relative;
             height: 600px;
@@ -219,6 +219,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            object-position: center center;
         }
 
         /* Main Content */
@@ -429,11 +430,11 @@
             }
             
             .welcome-section h1 {
-                font-size: 2.5rem;
+                height: 2.5rem;
             }
         }
 
-        /* Mobile (max-width: 768px) - FIXED */
+        /* Mobile (max-width: 768px) - FIXED with optimized hero image */
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: flex;
@@ -487,8 +488,36 @@
                 font-size: 2.3rem;
             }
             
+            /* OPTIMIZED HERO FOR MOBILE - Fixed zoom issue */
             .hero {
                 height: 450px;
+                margin-top: 112px;
+                position: relative;
+            }
+            
+            .hero-image {
+                /* For mobile, we want to show more of the image */
+                object-position: center 25%;
+                /* Use contain or cover based on preference */
+                object-fit: cover;
+                /* Ensure image scales properly */
+                width: 100%;
+                height: 100%;
+                /* Add a subtle overlay for better text readability */
+                filter: brightness(0.9);
+            }
+            
+            /* Add a background image fallback that's optimized for mobile */
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05));
+                z-index: 1;
+                pointer-events: none;
             }
             
             .contact-strap-item {
@@ -506,11 +535,19 @@
 
         /* Small Mobile (max-width: 576px) */
         @media (max-width: 576px) {
+            /* Further optimized hero for small mobile */
             .hero {
                 height: 400px;
                 margin-top: 112px;
             }
 
+            .hero-image {
+                /* Adjust object position for better composition on mobile */
+                object-position: center 30%;
+                /* Slightly reduce brightness for better contrast */
+                filter: brightness(0.85);
+            }
+            
             .welcome-section h1 {
                 font-size: 2rem;
             }
@@ -585,8 +622,16 @@
 
         /* Extra Small Mobile (max-width: 400px) */
         @media (max-width: 400px) {
+            /* Optimized hero for very small screens */
             .hero {
                 height: 350px;
+                margin-top: 100px;
+            }
+            
+            .hero-image {
+                /* Further adjust for very small screens */
+                object-position: center 35%;
+                filter: brightness(0.8);
             }
             
             .contact-strap-item {
@@ -644,6 +689,10 @@
                 height: 50vh;
                 min-height: 400px;
                 max-height: 500px;
+            }
+            
+            .hero-image {
+                object-position: center 20%;
             }
         }
 
@@ -723,12 +772,13 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Optimized Mobile Image -->
     <section class="hero" aria-label="Hero banner">
+        <!-- Using a higher resolution image that works well for both desktop and mobile -->
         <img src="https://github.com/qwuitty-prog/Chartered_Accountant/blob/main/assets/images/Card.png?raw=true" 
              alt="Professional Chartered Accountant Services" 
              class="hero-image"
-             onerror="this.src='https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'; this.onerror=null;">
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80';">
     </section>
 
     <!-- Main Content -->
@@ -906,8 +956,20 @@
             if (window.innerWidth <= 768) {
                 const strapContent = document.querySelector('.contact-strap-content');
                 if (strapContent) {
-                    // Reduce animation speed on mobile
                     strapContent.style.animationDuration = '30s';
+                }
+                
+                // Optimize hero image positioning for mobile
+                const heroImage = document.querySelector('.hero-image');
+                if (heroImage) {
+                    // Adjust image position based on screen size
+                    if (window.innerWidth <= 400) {
+                        heroImage.style.objectPosition = 'center 35%';
+                    } else if (window.innerWidth <= 576) {
+                        heroImage.style.objectPosition = 'center 30%';
+                    } else {
+                        heroImage.style.objectPosition = 'center 25%';
+                    }
                 }
             }
         });
@@ -930,6 +992,13 @@
                     }
                 }
             });
+            
+            // Preload hero image for better performance
+            const heroImage = document.querySelector('.hero-image');
+            if (heroImage) {
+                const img = new Image();
+                img.src = heroImage.src;
+            }
         });
     </script>
 </body>
